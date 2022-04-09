@@ -1,16 +1,13 @@
-import express from "express";
-import bodyParser from "body-parser";
+const express = require("express");
+const routes = require("./routes/index.js");
 
 const app = express();
-
-app.use(bodyParser.json());
-
 const port = 3000;
 
-app.get("/", (_req, res) => {
-  res.status(200).send({ messsage: "Welcome!" });
-});
+routes(app);
 
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);
 });
+
+module.exports = app;
