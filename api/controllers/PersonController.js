@@ -22,11 +22,36 @@ class PersonController {
     }
   }
 
+  static async findOneRegistration(req, res) {
+    const { studentId, registrationId } = req.params;
+    try {
+      const registration = await database.Registrations.findOne({
+        where: { id: Number(registrationId), student_id: Number(studentId) },
+      });
+      return res.status(200).json(registration);
+    } catch (err) {
+      return res.status(400).json(err.messsage);
+    }
+  }
+
   static async createPerson(req, res) {
     const newPerson = req.body;
     try {
       const newPersonCreated = await database.People.create(newPerson);
       return res.status(200).json(newPersonCreated);
+    } catch (err) {
+      return res.status(500).json(err.messsage);
+    }
+  }
+
+  static async createRegistration(req, res) {
+    const { studentId } = req.params;
+    const newRegistration = { ...req.body, student_id: Number(studentId) };
+    try {
+      const newRegistrationCreated = await database.Registrations.create(
+        newRegistration
+      );
+      return res.status(200).json(newRegistrationCreated);
     } catch (err) {
       return res.status(500).json(err.messsage);
     }
@@ -46,11 +71,39 @@ class PersonController {
     }
   }
 
+  static async updateRegistration(req, res) {
+    const { studentId, registrationId } = req.params;
+    const newInfo = req.body;
+    try {
+      await database.Registrations.update(newInfo, {
+        where: { id: Number(registrationId), student_id: Number(studentId) },
+      });
+      const updatedRegistration = await database.Registrations.findOne({
+        where: { id: Number(registrationId) },
+      });
+      return res.status(200).json(updatedRegistration);
+    } catch (err) {
+      return res.status(500).json(err.messsage);
+    }
+  }
+
   static async deletePerson(req, res) {
     const { id } = req.params;
     try {
       await database.People.destroy({ where: { id: Number(id) } });
       return res.status(200).json({ message: `Id ${id} deleted!` });
+    } catch (err) {
+      return res.status(500).json(err.messsage);
+    }
+  }
+
+  static async deleteRegistration(req, res) {
+    const { studentId, registrationId } = req.params;
+    try {
+      await database.Registrations.destroy({
+        where: { id: Number(registrationId) },
+      });
+      return res.status(200).json({ message: `Id ${registrationId} deleted!` });
     } catch (err) {
       return res.status(500).json(err.messsage);
     }
