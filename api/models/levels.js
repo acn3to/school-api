@@ -1,23 +1,16 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+("use strict");
 module.exports = (sequelize, DataTypes) => {
-  class Levels extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  Levels.init({
-    info_level: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Levels',
-  });
+  const Levels = sequelize.define(
+    "Levels",
+    {
+      info_level: DataTypes.STRING,
+    },
+    {}
+  );
+  Levels.associate = function (models) {
+    Levels.hasMany(models.Classes, {
+      foreignKey: "level_id",
+    });
+  };
   return Levels;
 };
