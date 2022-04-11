@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       role: DataTypes.STRING,
     },
-    {}
+    { paranoid: true }
   );
   People.associate = function (models) {
     People.hasMany(models.Classes, {

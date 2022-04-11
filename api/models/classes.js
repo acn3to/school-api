@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       start_date: DataTypes.DATEONLY,
     },
-    {}
+    { paranoid: true }
   );
   Classes.associate = function (models) {
     Classes.hasMany(models.Registrations, { foreignKey: "class_id" });

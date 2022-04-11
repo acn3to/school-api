@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       info_level: DataTypes.STRING,
     },
-    {}
+    { paranoid: true }
   );
   Levels.associate = function (models) {
     Levels.hasMany(models.Classes, {
