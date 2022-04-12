@@ -132,12 +132,25 @@ class PersonController {
   }
 
   static async deleteRegistration(req, res) {
-    const { studentId, registrationId } = req.params;
+    const { registrationId } = req.params;
     try {
       await database.Registrations.destroy({
         where: { id: Number(registrationId) },
       });
       return res.status(200).json({ message: `Id ${registrationId} deleted!` });
+    } catch (err) {
+      return res.status(500).json(err.messsage);
+    }
+  }
+
+  static async getRegistrations(req, res) {
+    const { studentId } = req.params;
+    try {
+      const person = await database.People.findOne({
+        where: { id: Number(studentId) },
+      });
+      const registrations = await person.getRegisteredClasses();
+      return res.status(200).json(registrations);
     } catch (err) {
       return res.status(500).json(err.messsage);
     }

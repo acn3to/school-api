@@ -11,6 +11,7 @@ router
     "/people/:studentId/registrations/:registrationId",
     PersonController.findOneRegistration
   )
+  .get("/people/:studentId/registrations", PersonController.getRegistrations)
 
   .post("/people", PersonController.createPerson)
   .post("/people/:studentId/registrations", PersonController.createRegistration)
