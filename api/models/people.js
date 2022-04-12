@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultScope: {
         where: { active: true },
       },
+      scopes: {
+        all: {
+          where: {},
+        },
+      },
     }
   );
   People.associate = function (models) {
