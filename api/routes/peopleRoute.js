@@ -3,26 +3,32 @@ const PersonController = require("../controllers/PersonController");
 
 const router = Router();
 
-router.get("/people", PersonController.listPeople);
-router.get("/people/:id", PersonController.findOnePerson);
-router.get(
-  "/people/:studentId/registrations/:registrationId",
-  PersonController.findOneRegistration
-);
-router.post("/people/", PersonController.createPerson);
-router.post(
-  "/people/:studentId/registrations",
-  PersonController.createRegistration
-);
-router.put("/people/:id", PersonController.updatePerson);
-router.put(
-  "/people/:studentId/registrations/:registrationId",
-  PersonController.updateRegistration
-);
-router.delete("/people/:id", PersonController.deletePerson);
-router.delete(
-  "/people/:studentId/registrations/:registrationId",
-  PersonController.deleteRegistration
-);
+router
+  .get("/people", PersonController.listPeople)
+  .get("/people/:id", PersonController.findOnePerson)
+  .get(
+    "/people/:studentId/registrations/:registrationId",
+    PersonController.findOneRegistration
+  )
+
+  .post("/people/", PersonController.createPerson)
+  .post("/people/:studentId/registrations", PersonController.createRegistration)
+  .post("/people/:id/restore", PersonController.restorePerson)
+  .post(
+    "/people/:studentId/registrations/:registationId/restore",
+    PersonController.restoreRegistration
+  )
+
+  .put("/people/:id", PersonController.updatePerson)
+  .put(
+    "/people/:studentId/registrations/:registrationId",
+    PersonController.updateRegistration
+  )
+
+  .delete("/people/:id", PersonController.deletePerson)
+  .delete(
+    "/people/:studentId/registrations/:registrationId",
+    PersonController.deleteRegistration
+  );
 
 module.exports = router;

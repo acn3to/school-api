@@ -97,6 +97,31 @@ class PersonController {
     }
   }
 
+  static async restorePerson(req, res) {
+    const { id } = req.params;
+    try {
+      await database.People.restore({ where: { id: Number(id) } });
+      return res.status(200).json({ message: `Id ${id} retored` });
+    } catch (err) {
+      return res.status(500).json(err.messsage);
+    }
+  }
+
+  static async restoreRegistration(req, res) {
+    const { studentId, registrationId } = req.params;
+    try {
+      await database.Registrations.restore({
+        where: {
+          id: Number(registrationId),
+          student_id: Number(studentId),
+        },
+      });
+      return res.status(200).json({ message: `Id ${id} restored` });
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  }
+
   static async deleteRegistration(req, res) {
     const { studentId, registrationId } = req.params;
     try {
