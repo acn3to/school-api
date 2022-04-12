@@ -12,7 +12,7 @@ router
     PersonController.findOneRegistration
   )
 
-  .post("/people/", PersonController.createPerson)
+  .post("/people", PersonController.createPerson)
   .post("/people/:studentId/registrations", PersonController.createRegistration)
   .post("/people/:id/restore", PersonController.restorePerson)
   .post(
