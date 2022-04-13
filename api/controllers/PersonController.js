@@ -49,7 +49,9 @@ class PersonController {
       const newPersonCreated = await database.People.create(newPerson);
       return res.status(200).json(newPersonCreated);
     } catch (err) {
-      return res.status(500).json(err.messsage);
+      return res
+        .status(400)
+        .json({ errors: err.errors.map((err) => err.message) });
     }
   }
 
