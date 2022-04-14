@@ -12,6 +12,11 @@ router
     PersonController.findOneRegistration
   )
   .get("/people/:studentId/registrations", PersonController.getRegistrations)
+  .get(
+    "/people/registrations/:classId/confirmeds",
+    PersonController.getRegistrationsByClass
+  )
+  .get("/people/registrations/full", PersonController.getFullClasses)
 
   .post("/people", PersonController.createPerson)
   .post("/people/:studentId/registrations", PersonController.createRegistration)

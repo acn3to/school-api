@@ -1,4 +1,5 @@
 const database = require("../models");
+const Sequelize = require("sequelize");
 
 class PersonController {
   static async listActivePeople(_req, res) {
@@ -153,6 +154,37 @@ class PersonController {
       });
       const registrations = await person.getRegisteredClasses();
       return res.status(200).json(registrations);
+    } catch (err) {
+      return res.status(500).json(err.messsage);
+    }
+  }
+
+  static async getRegistrationsByClass(req, res) {
+    const { classId } = req.params;
+    try {
+      const allRegistrations = await database.Registrations.findAndCountAll({
+        where: { class_id: Number(classId), status: "confirmed" },
+        limit: 10,
+        order: [["student_id", "ASC"]],
+      });
+      return res.status(200).json(allRegistrations);
+    } catch (err) {
+      return res.status(500).json(err.messsage);
+    }
+  }
+
+  static async getFullClasses(req, res) {
+    const classLimit = 2;
+    try {
+      const fullClasses = await database.Registrations.findAndCountAll({
+        where: {
+          status: "confirmed",
+        },
+        attributes: ["class_id"],
+        group: ["class_id"],
+        having: Sequelize.literal(`count(class_id) >= ${classLimit}`),
+      });
+      return res.status(200).json(fullClasses);
     } catch (err) {
       return res.status(500).json(err.messsage);
     }
