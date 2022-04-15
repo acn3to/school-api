@@ -25,6 +25,7 @@ router
     "/people/:studentId/registrations/:registationId/restore",
     PersonController.restoreRegistration
   )
+  .post("/people/:studentId/cancel", PersonController.cancelPerson)
 
   .put("/people/:id", PersonController.updatePerson)
   .put(
