@@ -1,11 +1,11 @@
 const { Router } = require("express");
-const PersonController = require("../controllers/PersonController");
+const PersonController = require("../controllers/PersonController.js");
 
 const router = Router();
 
 router
-  .get("/people", PersonController.listActivePeople)
-  .get("/people/all", PersonController.listPeople)
+  .get("/people", PersonController.listPeople)
+  .get("/people/actives", PersonController.listActivePeople)
   .get("/people/:id", PersonController.findOnePerson)
   .get(
     "/people/:studentId/registrations/:registrationId",
