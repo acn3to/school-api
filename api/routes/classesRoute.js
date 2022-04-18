@@ -12,4 +12,5 @@ router
   .put("/classes/:id", ClassController.updateClass)
 
   .delete("/classes/:id", ClassController.deleteClass);
+
 module.exports = router;

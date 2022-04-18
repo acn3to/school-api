@@ -29,6 +29,13 @@ class PeopleServices extends Services {
       );
     });
   }
+
+  async getRegistrationsByStudents(where = {}) {
+    const registrations = await database[this.modelName].findOne({
+      where: { ...where },
+    });
+    return registrations.getRegisteredClasses();
+  }
 }
 
 module.exports = PeopleServices;

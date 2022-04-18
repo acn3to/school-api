@@ -1,14 +1,8 @@
 const bodyParser = require("body-parser");
-const people = require("./peopleRoute");
-const levels = require("./levelsRoute");
-const classes = require("./classesRoute");
+const people = require("./peopleRoute.js");
+const levels = require("./levelsRoute.js");
+const classes = require("./classesRoute.js");
 
 module.exports = (app) => {
-  app.use(
-    bodyParser.json(),
-    bodyParser.urlencoded({ extended: false }),
-    people,
-    levels,
-    classes
-  );
+  app.use(bodyParser.json(), people, levels, classes);
 };

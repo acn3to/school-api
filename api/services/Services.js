@@ -5,13 +5,17 @@ class Services {
     this.modelName = modelName;
   }
 
-  async getAllRecords() {
-    return database[this.modelName].findAll();
+  async getAllRecords(where = {}) {
+    return database[this.modelName].findAll({ where: { ...where } });
   }
 
-  async getRecord() {}
+  async getRecord(where = {}) {
+    return database[this.modelName].findOne({ where: { ...where } });
+  }
 
-  async createRecord() {}
+  async createRecord(data) {
+    return database[this.modelName].create(data);
+  }
 
   async updateRecord(updatedRecords, id, transaction = {}) {
     return database[this.modelName].update(
@@ -31,7 +35,27 @@ class Services {
     );
   }
 
-  async deleteRecord() {}
+  async deleteRecord(id) {
+    return database[this.modelName].destroy({ where: { id: id } });
+  }
+
+  async restoreRecord(id) {
+    return database[this.modelName].restore({ where: { id: id } });
+  }
+
+  async queryDeletedRecord(id) {
+    return database[this.modelName].findOne({
+      paranoid: false,
+      where: { id: Number(id) },
+    });
+  }
+
+  async findAndCountRecords(where = {}, aggregators) {
+    return database[this.modelName].findAndCountAll({
+      where: { ...where },
+      ...aggregators,
+    });
+  }
 }
 
 module.exports = Services;

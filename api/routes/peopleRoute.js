@@ -1,42 +1,43 @@
 const { Router } = require("express");
 const PersonController = require("../controllers/PersonController.js");
+const RegistrationController = require("../controllers/RegistrationController.js");
 
 const router = Router();
 
 router
   .get("/people", PersonController.listPeople)
-  .get("/people/actives", PersonController.listActivePeople)
+  .get("/people/active", PersonController.listActivePeople)
   .get("/people/:id", PersonController.findOnePerson)
-  .get(
-    "/people/:studentId/registrations/:registrationId",
-    PersonController.findOneRegistration
-  )
   .get("/people/:studentId/registrations", PersonController.getRegistrations)
   .get(
-    "/people/registrations/:classId/confirmeds",
-    PersonController.getRegistrationsByClass
+    "/people/:studentId/registrations/:registrationId",
+    RegistrationController.getRegistration
   )
-  .get("/people/registrations/full", PersonController.getFullClasses)
-
+  .get(
+    "/people/registrations/:turmaId/confirmeds",
+    RegistrationController.getRegistrationsByClass
+  )
+  .get("/people/registrations/full", RegistrationController.getFullClasses)
   .post("/people", PersonController.createPerson)
-  .post("/people/:studentId/registrations", PersonController.createRegistration)
   .post("/people/:id/restore", PersonController.restorePerson)
-  .post(
-    "/people/:studentId/registrations/:registationId/restore",
-    PersonController.restoreRegistration
-  )
   .post("/people/:studentId/cancel", PersonController.cancelPerson)
-
+  .post(
+    "/people/:studentId/registrations",
+    RegistrationController.createRegistration
+  )
+  .post(
+    "/people/:studentId/registrations/:registrationsId/restore",
+    RegistrationController.restoreRegistration
+  )
   .put("/people/:id", PersonController.updatePerson)
   .put(
     "/people/:studentId/registrations/:registrationId",
-    PersonController.updateRegistration
+    RegistrationController.updateRegistration
   )
-
   .delete("/people/:id", PersonController.deletePerson)
   .delete(
     "/people/:studentId/registrations/:registrationId",
-    PersonController.deleteRegistration
+    RegistrationController.deleteRegistration
   );
 
 module.exports = router;
