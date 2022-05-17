@@ -12,7 +12,13 @@
   </a>
 </p>
 
-### 🏠 [Homepage](https://github.com/acn3to/school-api#readme)
+>The server side (backend) of a school management system with CRUD operations.
+
+## Built with
+
+* [Node.js](https://nodejs.org/en/)
+* [Express.js](https://expressjs.com/)
+* [Sequelize](https://sequelize.org/)
 
 ## Install
 
@@ -20,10 +26,10 @@
 npm install
 ```
 
-## Run tests
+## Usage in development mode
 
 ```sh
-npm run test
+npm run dev
 ```
 
 ## Author
