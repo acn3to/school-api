@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to school-api 👋</h1>
+<h1 align="center">School API 🏫</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/acn3to/school-api#readme" target="_blank">
@@ -36,7 +36,6 @@ npm run dev
 
 👤 **Arnaldo Neto**
 
-* Website: https://acn3to.github.io/acn3to-portfolio/
 * Github: [@acn3to](https://github.com/acn3to)
 * LinkedIn: [@arnaldo-n3to](https://linkedin.com/in/arnaldo-n3to)
 
